@@ -29,5 +29,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
     implementation(project(":extension:metro-nav3-runtime"))
 }
