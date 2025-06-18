@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.metro)
 }
 
 android {
@@ -41,6 +42,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
+    implementation(project(":feature:explore"))
+    implementation(project(":feature:feed"))
+    implementation(project(":feature:post"))
+    implementation(project(":feature:profile"))
+    implementation(project(":extension:metro-nav3-runtime"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -54,6 +61,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,4 +69,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+metro {
+    debug.set(true)
 }

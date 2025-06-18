@@ -11,6 +11,12 @@ kotlinxSerializationCore = "1.8.1"
 activityCompose = "1.10.1"
 composeBom = "2025.06.00"
 navigation3 = "1.0.0-alpha03"
+metro = "0.3.8"
+appcompat = "1.7.1"
+material = "1.12.0"
+jetbrainsKotlinJvm = "2.1.21"
+ksp = "2.1.20-1.0.32"
+kotlinPoet = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,10 +36,19 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3" }
 androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
+kotlin-poet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinPoet" }
+kotlin-poet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinPoet" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

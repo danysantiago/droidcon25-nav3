@@ -1,5 +1,26 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":feature:explore")
+
+
+include(":extension:metro-nav3-runtime")
+
+
+include(":extension:metro-nav3-compiler")
+
+
+include(":feature:feed")
+
+
+include(":feature:post")
+
+
+include(":feature:profile")
+
+
+include(":common")
+
+
 pluginManagement {
     repositories {
         google {
