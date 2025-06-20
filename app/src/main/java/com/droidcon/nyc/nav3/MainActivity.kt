@@ -16,8 +16,6 @@ import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.FeedScreen
 import com.droidcon.nyc.nav3.post.Post
 import com.droidcon.nyc.nav3.post.PostScreen
-import com.droidcon.nyc.nav3.profile.Profile
-import com.droidcon.nyc.nav3.profile.ProfileScreen
 import com.droidcon.nyc.nav3.ui.theme.NycDroidConTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,9 +33,6 @@ class MainActivity : ComponentActivity() {
                             when (key) {
                                 is Feed -> NavEntry(Feed) {
                                     FeedScreen(backstack = backStack)
-                                }
-                                is Profile -> NavEntry(Profile) {
-                                    ProfileScreen()
                                 }
                                 is Post -> NavEntry(Post(key.cat)) {
                                     PostScreen(backstack = backStack, post = key)
