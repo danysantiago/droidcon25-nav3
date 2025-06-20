@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -32,9 +33,8 @@ import com.droidcon.nyc.nav3.post.Post
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Explore : NavKey, TopLevelRoute { override val icon = Icons.Default.Search }
+object Explore : NavKey
 
-@NavEntryContent(key = Explore::class, scope = UiScope::class)
 @Composable
 fun ExploreScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {

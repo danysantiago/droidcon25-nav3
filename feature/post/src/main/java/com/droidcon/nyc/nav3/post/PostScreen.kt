@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -28,9 +29,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Post(@Contextual val cat: Cat) : NavKey
 
-@NavEntryContent(key = Post::class, scope = UiScope::class)
 @Composable
-internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
+fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     val cat = post.cat
     Column {
         Text(cat.author, fontSize = 30.sp)

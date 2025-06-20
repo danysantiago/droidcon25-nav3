@@ -39,9 +39,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 object Profile : NavKey, TopLevelRoute { override val icon = Icons.Default.Home }
 
-@NavEntryContent(key = Profile::class, scope = UiScope::class)
 @Composable
-internal fun ProfileScreen() {
+fun ProfileScreen() {
     Column {
         Text("My Profile", fontSize = 30.sp, color = Color.Black)
         val imageModifier =

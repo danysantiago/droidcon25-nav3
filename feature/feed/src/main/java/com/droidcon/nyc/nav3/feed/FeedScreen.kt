@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -40,9 +41,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 object Feed : NavKey, TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List }
 
-@NavEntryContent(key = Feed::class, scope = UiScope::class)
 @Composable
-internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
+fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {
         Text("Feed", fontSize = 30.sp, color = Color.Blue)
         LazyColumn (

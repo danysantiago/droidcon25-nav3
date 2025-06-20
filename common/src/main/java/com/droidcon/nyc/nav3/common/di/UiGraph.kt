@@ -7,12 +7,12 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesGraphExtension
 import dev.zacsweers.metro.Provides
 
-@ContributesGraphExtension(UiScope::class)
-interface UiGraph {
-    val navEntries: Set<BaseNavEntryProvider>
-
-    @ContributesGraphExtension.Factory(AppScope::class)
-    fun interface Factory {
-        fun createUiGraph(@Provides backstack: TopLevelBackStack<NavKey>): UiGraph
-    }
-}
+//@ContributesGraphExtension(UiScope::class)
+//interface UiGraph {
+//    val navEntries: Set<BaseNavEntryProvider>
+//
+//    @ContributesGraphExtension.Factory(AppScope::class)
+//    fun interface Factory {
+//        fun createUiGraph(@Provides backstack: TopLevelBackStack<NavKey>): UiGraph
+//    }
+//}
