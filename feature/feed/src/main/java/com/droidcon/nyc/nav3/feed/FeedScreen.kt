@@ -27,35 +27,35 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.catList
-import com.droidcon.nyc.nav3.post.Post
+//import com.droidcon.nyc.nav3.post.Post
 import kotlinx.serialization.Serializable
 
-@Composable
-internal fun FeedScreen(backstack: SnapshotStateList<NavKey>) {
-    Column {
-        Text("Feed", fontSize = 30.sp, color = Color.Blue)
-        LazyColumn (
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ){
-            items(catList) { cat: Cat ->
-                Row(Modifier.clickable { backstack.add(Post(cat)) }) {
-                    val imageModifier = Modifier
-                        .size(100.dp)
-                        .padding(10.dp)
-                    Image(painterResource(cat.imageId), cat.text, imageModifier)
-                    Column(modifier = Modifier
-                        .fillMaxHeight()
-                        .wrapContentHeight()) {
-                        Spacer(Modifier.height(10.dp))
-                        Text(cat.author)
-                        Text("${cat.text.take(70)}${if (cat.text.length > 70) "..." else ""}", modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentWidth())
-                    }
-                }
-            }
-        }
-    }
-}
+//@Composable
+//internal fun FeedScreen(backstack: SnapshotStateList<NavKey>) {
+//    Column {
+//        Text("Feed", fontSize = 30.sp, color = Color.Blue)
+//        LazyColumn (
+//            modifier = Modifier.fillMaxWidth(),
+//            contentPadding = PaddingValues(16.dp),
+//            verticalArrangement = Arrangement.spacedBy(16.dp)
+//        ){
+//            items(catList) { cat: Cat ->
+//                Row(Modifier.clickable { backstack.add(Post(cat)) }) {
+//                    val imageModifier = Modifier
+//                        .size(100.dp)
+//                        .padding(10.dp)
+//                    Image(painterResource(cat.imageId), cat.text, imageModifier)
+//                    Column(modifier = Modifier
+//                        .fillMaxHeight()
+//                        .wrapContentHeight()) {
+//                        Spacer(Modifier.height(10.dp))
+//                        Text(cat.author)
+//                        Text("${cat.text.take(70)}${if (cat.text.length > 70) "..." else ""}", modifier = Modifier
+//                            .fillMaxWidth()
+//                            .wrapContentWidth())
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}

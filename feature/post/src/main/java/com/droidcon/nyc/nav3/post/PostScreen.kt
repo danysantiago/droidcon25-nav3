@@ -23,33 +23,31 @@ import com.droidcon.nyc.nav3.common.data.Cat
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
-@Composable
-internal fun PostScreen(backstack: SnapshotStateList<NavKey>, post: Post) {
-    val cat = post.cat
-    Column {
-        Text(cat.author, fontSize = 30.sp)
-        Box {
-            val imageModifier =
-                Modifier.size(300.dp)
-            Image(painterResource(cat.imageId), cat.text, imageModifier)
-        }
-        Text(cat.text, modifier = Modifier.padding(10.dp))
-        Spacer(Modifier.width(20.dp))
-        Button(
-            onClick = { cat.favorite.value = !cat.favorite.value },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Companion.Blue),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(text = if (cat.favorite.value) "Remove Favorite" else "Add Favorite")
-        }
-        Button(
-            onClick = { backstack.removeLast() },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Companion.Red),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(text = "Go to Previous screen")
-        }
-    }
-}
-
-
+//@Composable
+//internal fun PostScreen(backstack: SnapshotStateList<NavKey>, post: Post) {
+//    val cat = post.cat
+//    Column {
+//        Text(cat.author, fontSize = 30.sp)
+//        Box {
+//            val imageModifier =
+//                Modifier.size(300.dp)
+//            Image(painterResource(cat.imageId), cat.text, imageModifier)
+//        }
+//        Text(cat.text, modifier = Modifier.padding(10.dp))
+//        Spacer(Modifier.width(20.dp))
+//        Button(
+//            onClick = { cat.favorite.value = !cat.favorite.value },
+//            colors = ButtonDefaults.buttonColors(containerColor = Color.Companion.Blue),
+//            modifier = Modifier.fillMaxWidth(),
+//        ) {
+//            Text(text = if (cat.favorite.value) "Remove Favorite" else "Add Favorite")
+//        }
+//        Button(
+//            onClick = { backstack.removeLast() },
+//            colors = ButtonDefaults.buttonColors(containerColor = Color.Companion.Red),
+//            modifier = Modifier.fillMaxWidth(),
+//        ) {
+//            Text(text = "Go to Previous screen")
+//        }
+//    }
+//}
