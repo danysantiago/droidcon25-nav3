@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
-import com.droidcon.nyc.nav3.common.Navigator
+import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
@@ -31,14 +31,14 @@ object Feed : NavKey, TopLevelRoute { override val icon = Icons.AutoMirrored.Fil
 
 @NavEntryContent(key = Feed::class, scope = UiScope::class)
 @Composable
-internal fun FeedScreen(navigator: Navigator) {
+internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     LazyColumn (
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ){
         items(catList) { cat: Cat ->
-            Row(Modifier.clickable { navigator.navigateTo(Post(cat)) }) {
+            Row(Modifier.clickable { backstack.add(Post(cat)) }) {
                 val imageModifier = Modifier.size(100.dp)
                 Image(painterResource(cat.imageId), cat.author, imageModifier)
                 Text(cat.text)

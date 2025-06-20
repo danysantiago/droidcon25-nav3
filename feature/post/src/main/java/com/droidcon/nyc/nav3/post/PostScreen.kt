@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
-import com.droidcon.nyc.nav3.common.Navigator
+import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
@@ -26,7 +26,7 @@ data class Post(@Contextual val cat: Cat) : NavKey
 
 @NavEntryContent(key = Post::class, scope = UiScope::class)
 @Composable
-internal fun PostScreen(navigator: Navigator, post: Post) {
+internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     val cat = post.cat
     Column {
         Box {
@@ -37,7 +37,7 @@ internal fun PostScreen(navigator: Navigator, post: Post) {
         Text(cat.text)
         Text(cat.author)
         Button(
-            onClick = { navigator.navigateBack() },
+            onClick = { backstack.removeLast() },
             colors = ButtonDefaults.buttonColors(containerColor = LightGray),
             modifier = Modifier.fillMaxWidth(),
         ) {
