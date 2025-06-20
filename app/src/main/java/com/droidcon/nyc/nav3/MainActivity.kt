@@ -18,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
+import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.Navigator
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
@@ -71,9 +73,13 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { padding ->
-                    NavDisplay(topLevelBackStack.backStack, modifier = Modifier.padding(padding)) {
-                        graph.navEntries[it::class]?.invoke(it) ?: error("Unknown destination: $it")
-                    }
+                    NavDisplay(
+                        backStack = topLevelBackStack.backStack,
+                        modifier = Modifier.padding(padding),
+                        entryProvider = entryProvider {
+                            graph.navEntries.forEach { it.install(this) }
+                        }
+                    )
                 }
             }
         }

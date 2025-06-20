@@ -7,12 +7,10 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesGraphExtension
 import dev.zacsweers.metro.Multibinds
 import dev.zacsweers.metro.Provides
-import kotlin.reflect.KClass
 
 @ContributesGraphExtension(UiScope::class)
 interface UiGraph {
-    @Multibinds
-    val navEntries: Map<KClass<*>, BaseNavEntryProvider<NavKey>>
+    val navEntries: Set<BaseNavEntryProvider>
 
     @ContributesGraphExtension.Factory(AppScope::class)
     fun interface Factory {

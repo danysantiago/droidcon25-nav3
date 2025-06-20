@@ -14,6 +14,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
@@ -103,29 +104,13 @@ class NavEntryProcessor(
 
         val typeSpec = TypeSpec.classBuilder(providerName)
             .addAnnotation(
-                AnnotationSpec.builder(ClassName("dev.zacsweers.metro", "ContributesIntoMap"))
+                AnnotationSpec.builder(ClassName("dev.zacsweers.metro", "ContributesIntoSet"))
                     .addMember("scope = %T::class", contribution.classScope)
-                    .addMember(
-                        "binding = %T<%T>()",
-                        ClassName("dev.zacsweers.metro", "binding"),
-                        ClassName(
-                            "com.droidcon.nyc.nav3.metro",
-                            "BaseNavEntryProvider"
-                        ).parameterizedBy(
-                            ClassName("androidx.navigation3.runtime", "NavKey")
-                        )
-                    )
-                    .build()
-            )
-            .addAnnotation(
-                AnnotationSpec.builder(ClassName("dev.zacsweers.metro", "ClassKey"))
-                    .addMember("%T::class", contribution.classKey)
                     .build()
             )
             .addAnnotation(ClassName("dev.zacsweers.metro", "Inject"))
             .superclass(
                 ClassName("com.droidcon.nyc.nav3.metro", "BaseNavEntryProvider")
-                    .parameterizedBy(contribution.classKey)
             )
             .primaryConstructor(
                 FunSpec.constructorBuilder()
@@ -140,12 +125,17 @@ class NavEntryProcessor(
                 }
             )
             .addFunction(
-                FunSpec.builder("Content")
-                    .addAnnotation(ClassName("androidx.compose.runtime", "Composable"))
+                FunSpec.builder("install")
                     .addModifiers(KModifier.OVERRIDE)
-                    .addParameter("key", contribution.classKey)
+                    .addParameter(
+                        name = "builder",
+                        type = ClassName("androidx.navigation3.runtime", "EntryProviderBuilder")
+                            .parameterizedBy(ClassName("androidx.navigation3.runtime", "NavKey"))
+                    )
                     .addStatement(
-                        "%L(${contribution.parameters.joinToString { "%L" }})",
+                        "builder.%M<%T> { key -> %L(${contribution.parameters.joinToString { "%L" }}) }",
+                        MemberName("androidx.navigation3.runtime", "entry"),
+                        contribution.classKey,
                         contribution.functionName,
                         *contribution.parameters.map { it.name }.toTypedArray()
                     )
