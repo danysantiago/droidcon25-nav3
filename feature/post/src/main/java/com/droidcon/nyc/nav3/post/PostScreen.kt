@@ -12,25 +12,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
-import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
-import com.droidcon.nyc.nav3.common.di.UiScope
-import com.droidcon.nyc.nav3.metro.NavEntryContent
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class Post(@Contextual val cat: Cat) : NavKey
-
-@NavEntryContent(key = Post::class, scope = UiScope::class)
 @Composable
-internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
+internal fun PostScreen(backstack: SnapshotStateList<NavKey>, post: Post) {
     val cat = post.cat
     Column {
         Text(cat.author, fontSize = 30.sp)
