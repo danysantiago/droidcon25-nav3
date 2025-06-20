@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                     NavDisplay(
                         backStack = topLevelBackStack.backStack,
                         modifier = Modifier.padding(padding),
+                        onBack = { topLevelBackStack.removeLast() },
                         entryProvider = entryProvider {
                             graph.navEntries.forEach { it.install(this) }
                         }
