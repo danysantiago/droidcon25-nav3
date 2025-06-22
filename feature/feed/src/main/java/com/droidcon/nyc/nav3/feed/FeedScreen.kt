@@ -30,12 +30,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entry
+import com.droidcon.nyc.nav3.common.NavEntryProvider
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -71,8 +76,11 @@ internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     }
 }
 
-fun <T: Any> EntryProviderBuilder<T>.feedEntryProvider(backstack: TopLevelBackStack<NavKey>) {
-    entry<Feed> {
-        FeedScreen(backstack)
+@ContributesIntoSet(scope = AppScope::class)
+class FeedNavEntryProvider @Inject constructor(val backstack: TopLevelBackStack<NavKey>) : NavEntryProvider {
+    override fun invoke(builder: EntryProviderBuilder<NavKey>) {
+        builder.entry<Feed> {
+            FeedScreen(backstack)
+        }
     }
 }

@@ -20,8 +20,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entry
+import com.droidcon.nyc.nav3.common.NavEntryProvider
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
@@ -57,9 +62,13 @@ internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     }
 }
 
-fun <T: Any> EntryProviderBuilder<T>.postEntryProvider(backstack: TopLevelBackStack<NavKey>) {
-    entry<Post> {
-        PostScreen(backstack, it)
+
+@ContributesIntoSet(scope = AppScope::class)
+class PostNavEntryProvider @Inject constructor(val backstack: TopLevelBackStack<NavKey>) : NavEntryProvider {
+    override fun invoke(builder: EntryProviderBuilder<NavKey>) {
+        builder.entry<Post> {
+            PostScreen(backstack, it)
+        }
     }
 }
 
