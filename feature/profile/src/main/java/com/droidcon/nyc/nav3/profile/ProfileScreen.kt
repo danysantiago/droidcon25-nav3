@@ -26,20 +26,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
-import com.droidcon.nyc.nav3.common.di.UiScope
-import com.droidcon.nyc.nav3.metro.NavEntryContent
 import kotlinx.serialization.Serializable
+import java.util.Map.entry
 
 
 @Serializable
 object Profile : NavKey, TopLevelRoute { override val icon = Icons.Default.Home }
 
-@NavEntryContent(key = Profile::class, scope = UiScope::class)
 @Composable
 internal fun ProfileScreen() {
     Column {
@@ -78,5 +78,11 @@ internal fun ProfileScreen() {
                 }
             }
         }
+    }
+}
+
+fun <T: Any> EntryProviderBuilder<T>.profileEntryProvider() {
+    entry<Profile> {
+        ProfileScreen()
     }
 }

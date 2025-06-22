@@ -27,12 +27,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
-import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
 import kotlinx.serialization.Serializable
@@ -40,7 +41,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 object Feed : NavKey, TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List }
 
-@NavEntryContent(key = Feed::class, scope = UiScope::class)
 @Composable
 internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {
@@ -68,5 +68,11 @@ internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
                 }
             }
         }
+    }
+}
+
+fun <T: Any> EntryProviderBuilder<T>.feedEntryProvider(backstack: TopLevelBackStack<NavKey>) {
+    entry<Feed> {
+        FeedScreen(backstack)
     }
 }

@@ -26,15 +26,12 @@ import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
-import com.droidcon.nyc.nav3.common.di.UiScope
-import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
 import kotlinx.serialization.Serializable
 
 @Serializable
 object Explore : NavKey, TopLevelRoute { override val icon = Icons.Default.Search }
 
-@NavEntryContent(key = Explore::class, scope = UiScope::class)
 @Composable
 fun ExploreScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {

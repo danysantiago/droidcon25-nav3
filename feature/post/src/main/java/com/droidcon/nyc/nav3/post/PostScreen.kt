@@ -17,18 +17,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
-import com.droidcon.nyc.nav3.common.di.UiScope
-import com.droidcon.nyc.nav3.metro.NavEntryContent
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Post(@Contextual val cat: Cat) : NavKey
 
-@NavEntryContent(key = Post::class, scope = UiScope::class)
 @Composable
 internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     val cat = post.cat
@@ -55,6 +54,12 @@ internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
         ) {
             Text(text = "Go to Previous screen")
         }
+    }
+}
+
+fun <T: Any> EntryProviderBuilder<T>.postEntryProvider(backstack: TopLevelBackStack<NavKey>) {
+    entry<Post> {
+        PostScreen(backstack, it)
     }
 }
 
