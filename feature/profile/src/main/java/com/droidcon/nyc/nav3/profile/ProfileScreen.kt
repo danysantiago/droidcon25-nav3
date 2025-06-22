@@ -41,9 +41,9 @@ import java.util.Map.entry
 object Profile : NavKey, TopLevelRoute { override val icon = Icons.Default.Home }
 
 @Composable
-internal fun ProfileScreen() {
+internal fun ProfileScreen(name: String) {
     Column {
-        Text("My Profile", fontSize = 30.sp, color = Color.Black)
+        Text("My Profile - $name", fontSize = 30.sp, color = Color.Black)
         val imageModifier =
             Modifier.size(300.dp)
         Image(painterResource(R.drawable.cat_3), "My Profile Cat", imageModifier)
@@ -81,8 +81,8 @@ internal fun ProfileScreen() {
     }
 }
 
-fun <T: Any> EntryProviderBuilder<T>.profileEntryProvider() {
+fun <T: Any> EntryProviderBuilder<T>.profileEntryProvider(name: String) {
     entry<Profile> {
-        ProfileScreen()
+        ProfileScreen(name)
     }
 }

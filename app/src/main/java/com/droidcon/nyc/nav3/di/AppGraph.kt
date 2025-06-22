@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
+import com.droidcon.nyc.nav3.common.data.RandomNameFactory
 import com.droidcon.nyc.nav3.feed.feedEntryProvider
 import com.droidcon.nyc.nav3.post.postEntryProvider
 import com.droidcon.nyc.nav3.profile.profileEntryProvider
@@ -18,10 +19,11 @@ interface AppGraph {
 
     @Provides
     private fun provideNavEntryProvider(
-        topLevelBackStack: TopLevelBackStack<NavKey>
+        topLevelBackStack: TopLevelBackStack<NavKey>,
+        nameFactory: RandomNameFactory,
     ): NavEntryProvider = { builder ->
         builder.apply {
-            profileEntryProvider()
+            profileEntryProvider(nameFactory.name())
             feedEntryProvider(topLevelBackStack)
             postEntryProvider(topLevelBackStack)
         }
