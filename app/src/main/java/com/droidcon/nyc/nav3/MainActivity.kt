@@ -17,12 +17,14 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
+import com.droidcon.nyc.nav3.di.AppGraph
 import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.feedEntryProvider
 import com.droidcon.nyc.nav3.post.postEntryProvider
 import com.droidcon.nyc.nav3.profile.Profile
 import com.droidcon.nyc.nav3.profile.profileEntryProvider
 import com.droidcon.nyc.nav3.ui.theme.NycDroidConTheme
+import dev.zacsweers.metro.createGraphFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NycDroidConTheme {
                 val topLevelBackStack = remember { TopLevelBackStack<NavKey>(Feed) }
+                val appGraph = createGraphFactory<AppGraph.Factory>().create(topLevelBackStack)
                 val routes : List<TopLevelRoute> = listOf(Feed, Profile)
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -59,9 +62,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding),
                         onBack = { topLevelBackStack.removeLast() },
                         entryProvider = entryProvider {
-                            profileEntryProvider()
-                            feedEntryProvider(topLevelBackStack)
-                            postEntryProvider(topLevelBackStack)
+                            appGraph.navEntryProvider.invoke(this)
                         }
                     )
                 }
