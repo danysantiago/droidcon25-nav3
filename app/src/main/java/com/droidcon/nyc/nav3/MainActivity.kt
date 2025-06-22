@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.mutableStateListOf
@@ -16,6 +17,8 @@ import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.FeedScreen
 import com.droidcon.nyc.nav3.post.Post
 import com.droidcon.nyc.nav3.post.PostScreen
+import com.droidcon.nyc.nav3.profile.Profile
+import com.droidcon.nyc.nav3.profile.ProfileScreen
 import com.droidcon.nyc.nav3.ui.theme.NycDroidConTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +28,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             NycDroidConTheme {
                 val backStack = remember { mutableStateListOf<NavKey>(Feed) }
-                Scaffold { padding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+
+                    }
+                ) { padding ->
                     NavDisplay(
                         backStack = backStack,
                         modifier = Modifier.padding(padding),
