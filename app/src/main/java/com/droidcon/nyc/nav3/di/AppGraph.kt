@@ -13,7 +13,7 @@ import dev.zacsweers.metro.Provides
 
 @DependencyGraph(scope = AppScope::class)
 interface AppGraph {
-    val navEntryProvider: NavEntryProvider
+    val navEntryProvider: Set<NavEntryProvider>
 
     @DependencyGraph.Factory
     interface Factory {

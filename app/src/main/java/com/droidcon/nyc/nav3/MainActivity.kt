@@ -18,6 +18,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.di.AppGraph
+import com.droidcon.nyc.nav3.explore.Explore
 import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.profile.Profile
 import com.droidcon.nyc.nav3.ui.theme.NycDroidConTheme
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
             NycDroidConTheme {
                 val topLevelBackStack = remember { TopLevelBackStack<NavKey>(Feed) }
                 val appGraph = createGraphFactory<AppGraph.Factory>().create(topLevelBackStack)
-                val routes : List<TopLevelRoute> = listOf(Feed, Profile)
+                val routes : List<TopLevelRoute> = listOf(Feed, Profile, Explore)
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding),
                         onBack = { topLevelBackStack.removeLast() },
                         entryProvider = entryProvider {
-                            appGraph.navEntryProvider.invoke(this)
+                            appGraph.navEntryProvider.forEach { it.invoke(this) }
                         }
                     )
                 }

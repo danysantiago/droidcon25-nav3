@@ -32,8 +32,12 @@ import androidx.navigation3.runtime.entry
 import com.droidcon.nyc.nav3.common.NavEntryProvider
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
+import com.droidcon.nyc.nav3.common.data.RandomNameFactory
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import kotlinx.serialization.Serializable
 import java.util.Map.entry
 
@@ -82,8 +86,14 @@ internal fun ProfileScreen(name: String) {
     }
 }
 
-fun <T: Any> EntryProviderBuilder<T>.profileEntryProvider(name: String) {
-    entry<Profile> {
-        ProfileScreen(name)
+@ContributesIntoSet(scope = AppScope::class)
+class ProfileNavEntryProvider @Inject constructor(randomNameFactory: RandomNameFactory) : NavEntryProvider {
+
+    val name = randomNameFactory.name()
+
+    override fun invoke(builder: EntryProviderBuilder<NavKey>) {
+        builder.entry<Profile> {
+            ProfileScreen(name)
+        }
     }
 }

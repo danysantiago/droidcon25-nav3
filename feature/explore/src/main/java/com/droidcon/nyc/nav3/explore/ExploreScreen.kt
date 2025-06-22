@@ -21,12 +21,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
+import com.droidcon.nyc.nav3.common.NavEntryProvider
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
+import com.droidcon.nyc.nav3.common.data.RandomNameFactory
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.post.Post
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -46,5 +53,14 @@ fun ExploreScreen(backstack: TopLevelBackStack<NavKey>) {
             }
         }
     }
+}
 
+@ContributesIntoSet(scope = AppScope::class)
+class ExploreNavEntryProvider @Inject constructor(val topLevelBackStack: TopLevelBackStack<NavKey>) : NavEntryProvider {
+
+    override fun invoke(builder: EntryProviderBuilder<NavKey>) {
+        builder.entry<Explore> {
+            ExploreScreen(topLevelBackStack)
+        }
+    }
 }
