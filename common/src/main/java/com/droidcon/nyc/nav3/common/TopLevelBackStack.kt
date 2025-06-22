@@ -4,45 +4,28 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import kotlin.collections.remove
+import androidx.navigation3.runtime.NavKey
+import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 
-class TopLevelBackStack<T : Any>(startKey: T) {
+class TopLevelBackStack<T : NavKey>(startKey: T) {
 
-    // Maintain a stack for each top level route
-    private var topLevelStacks: LinkedHashMap<T, SnapshotStateList<T>> =
-        linkedMapOf(startKey to mutableStateListOf(startKey))
+    /* Switch to top level destination */
+    fun swapTopLevel(key: TopLevelRoute) {
 
-    // Expose the current top level route for consumers
-    var topLevelKey by mutableStateOf(startKey)
-        private set
-
-    // Expose the back stack so it can be rendered by the NavDisplay
-    val backStack = mutableStateListOf(startKey)
-
-    private fun updateBackStack() {
-        backStack.clear()
-        topLevelStacks[topLevelKey]?.let { backStack.addAll(it) }
     }
 
-    fun swapTopLevel(key: T) {
-        // If the top level doesn't exist, add it
-        if (key !in topLevelStacks) {
-            topLevelStacks.put(key, mutableStateListOf(key))
-        }
-        topLevelKey = key
-        updateBackStack()
-    }
-
+    /* Add to current backstack */
     fun add(key: T) {
-        topLevelStacks[topLevelKey]?.add(key)
-        updateBackStack()
+
     }
 
+    /* Pop from current backstack */
     fun removeLast() {
-        val removedKey = topLevelStacks[topLevelKey]?.removeLastOrNull()
-        // If the removed key was a top level key, remove the associated top level stack
-        topLevelStacks.remove(removedKey)
-        updateBackStack()
+
+    }
+
+    /* Updates the active backstack */
+    private fun updateBackStack() {
+
     }
 }
