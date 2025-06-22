@@ -6,13 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
+import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.FeedScreen
 import com.droidcon.nyc.nav3.post.Post
@@ -27,15 +30,31 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NycDroidConTheme {
-                val backStack = remember { mutableStateListOf<NavKey>(Feed) }
+                val backStack = remember { TopLevelBackStack<NavKey>(Feed) }
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-
+                        val topLevelRoutes = listOf(Feed, Profile)
+                        NavigationBar {
+                            topLevelRoutes.forEach { route ->
+                                NavigationBarItem(
+                                    selected = route == backStack.currentTopLevel,
+                                    onClick = {
+                                        backStack.swapTopLevel(route)
+                                    },
+                                    icon = {
+                                        Icon(
+                                            imageVector = route.icon,
+                                            contentDescription = null
+                                        )
+                                    }
+                                )
+                            }
+                        }
                     }
                 ) { padding ->
                     NavDisplay(
-                        backStack = backStack,
+                        backStack = backStack.currentBackStack,
                         modifier = Modifier.padding(padding),
                         entryProvider = { key ->
                             when (key) {
@@ -44,6 +63,9 @@ class MainActivity : ComponentActivity() {
                                 }
                                 is Post -> NavEntry(Post(key.cat)) {
                                     PostScreen(backstack = backStack, post = key)
+                                }
+                                is Profile -> NavEntry(Profile) {
+                                    ProfileScreen()
                                 }
                                 else -> error("Unknown key: $key")
                             }

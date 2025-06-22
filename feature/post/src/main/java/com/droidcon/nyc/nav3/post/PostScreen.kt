@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
+import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
@@ -26,7 +27,7 @@ import kotlinx.serialization.Serializable
 data class Post(@Contextual val cat: Cat) : NavKey
 
 @Composable
-fun PostScreen(backstack: MutableList<NavKey>, post: Post) {
+fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     val cat = post.cat
     Column {
         Text(cat.author, fontSize = 30.sp)
