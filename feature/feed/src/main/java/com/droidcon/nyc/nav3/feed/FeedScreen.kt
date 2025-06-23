@@ -31,7 +31,7 @@ import com.droidcon.nyc.nav3.post.Post
 import kotlinx.serialization.Serializable
 
 @Composable
-internal fun FeedScreen(backstack: SnapshotStateList<NavKey>) {
+fun FeedScreen(backstack: SnapshotStateList<NavKey>) {
     Column {
         Text("Feed", fontSize = 30.sp, color = Color.Blue)
         LazyColumn (
