@@ -28,7 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
@@ -36,6 +38,7 @@ import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
+import com.droidcon.nyc.nav3.post.PostScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -69,4 +72,8 @@ fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
             }
         }
     }
+}
+
+fun <T: Any> EntryProviderBuilder<T>.feedEntry(backstack: TopLevelBackStack<NavKey>) {
+    entry<Feed> { FeedScreen(backstack) }
 }
