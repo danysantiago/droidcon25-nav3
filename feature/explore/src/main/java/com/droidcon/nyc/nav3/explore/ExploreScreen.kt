@@ -3,7 +3,6 @@ package com.droidcon.nyc.nav3.explore
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -29,10 +28,12 @@ import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
+import dev.zacsweers.metro.ContributesIntoSet
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Explore : NavKey, TopLevelRoute { override val icon = Icons.Default.Search }
+@ContributesIntoSet(scope = UiScope::class)
+object Explore : TopLevelRoute { override val icon = Icons.Default.Search }
 
 @NavEntryContent(key = Explore::class, scope = UiScope::class)
 @Composable

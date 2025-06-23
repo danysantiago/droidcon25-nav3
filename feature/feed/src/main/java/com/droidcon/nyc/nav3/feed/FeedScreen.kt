@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,10 +33,12 @@ import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
+import dev.zacsweers.metro.ContributesIntoSet
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Feed : NavKey, TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List }
+@ContributesIntoSet(scope = UiScope::class)
+object Feed : TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List }
 
 @NavEntryContent(key = Feed::class, scope = UiScope::class)
 @Composable

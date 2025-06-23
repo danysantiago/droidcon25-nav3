@@ -17,8 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,18 +24,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation3.runtime.NavKey
-import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.Cat
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
+import dev.zacsweers.metro.ContributesIntoSet
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-object Profile : NavKey, TopLevelRoute { override val icon = Icons.Default.Home }
+@ContributesIntoSet(scope = UiScope::class)
+object Profile : TopLevelRoute { override val icon = Icons.Default.Home }
 
 @NavEntryContent(key = Profile::class, scope = UiScope::class)
 @Composable
