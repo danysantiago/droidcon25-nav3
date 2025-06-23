@@ -17,6 +17,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
+import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.FeedScreen
 import com.droidcon.nyc.nav3.post.Post
@@ -35,7 +36,18 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-
+                        NavigationBar {
+                            val topLevelRoutes: List<TopLevelRoute>
+                            topLevelRoutes.forEach { route ->
+                                NavigationBarItem(
+                                    selected = ,
+                                    onClick = ,
+                                    icon = {
+                                        Icon(imageVector = route.icon, contentDescription = null)
+                                    }
+                                )
+                            }
+                        }
                     }
                 ) { padding ->
                     NavDisplay(
