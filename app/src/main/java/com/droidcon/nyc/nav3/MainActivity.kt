@@ -12,12 +12,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
+import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
-import com.droidcon.nyc.nav3.explore.Explore
 import com.droidcon.nyc.nav3.feed.Feed
 import com.droidcon.nyc.nav3.feed.FeedScreen
 import com.droidcon.nyc.nav3.post.Post
@@ -60,18 +60,15 @@ class MainActivity : ComponentActivity() {
                         backStack = topLevelBackStack.backStack,
                         modifier = Modifier.padding(padding),
                         onBack = { topLevelBackStack.removeLast() },
-                        entryProvider = { key ->
-                            when (key) {
-                                is Profile -> NavEntry(Profile) {
-                                    ProfileScreen()
-                                }
-                                is Feed -> NavEntry(Feed) {
-                                    FeedScreen(backstack =  topLevelBackStack)
-                                }
-                                is Post -> NavEntry(Post(key.cat)) {
-                                    PostScreen(backstack =  topLevelBackStack, post = key)
-                                }
-                                else -> error("Unknown key: $key")
+                        entryProvider = entryProvider {
+                            entry<Profile> {
+                                ProfileScreen()
+                            }
+                            entry<Feed> {
+                                FeedScreen(backstack =  topLevelBackStack)
+                            }
+                            entry<Post> { post ->
+                                PostScreen(backstack =  topLevelBackStack, post = post)
                             }
                         }
                     )
