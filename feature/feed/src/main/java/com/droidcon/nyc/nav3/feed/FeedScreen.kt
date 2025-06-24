@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
 @Composable
 fun FeedScreen(backstack: SnapshotStateList<NavKey>) {
     Column {
-        Text("Feed", fontSize = 30.sp, color = Color.Blue)
+        Text("Feed", fontSize = 30.sp, color = Color.Blue, modifier = Modifier.padding(15.dp))
         LazyColumn (
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(16.dp),
