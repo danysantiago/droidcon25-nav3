@@ -44,7 +44,7 @@ object Feed : TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List
 @Composable
 internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {
-        Text("Feed", fontSize = 30.sp, color = Color.Blue)
+        Text("Feed", fontSize = 30.sp, color = Color.Blue, modifier = Modifier.padding(15.dp))
         LazyColumn (
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(16.dp),
