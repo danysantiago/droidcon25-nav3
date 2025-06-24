@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NycDroidConTheme {
-                Scaffold {
-                    Text("Hello World!", modifier = Modifier.padding(it))
+                Scaffold { padding ->
+                    Text("Hello World!", modifier = Modifier.padding(padding))
                 }
             }
         }
