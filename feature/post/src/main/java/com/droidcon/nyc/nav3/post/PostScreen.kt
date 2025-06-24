@@ -36,7 +36,7 @@ fun PostScreen(backstack: MutableList<NavKey>, post: Post) {
             Image(painterResource(cat.imageId), cat.text, imageModifier)
         }
         Text(cat.text, modifier = Modifier.padding(10.dp))
-        Spacer(Modifier.width(20.dp))
+        Spacer(Modifier.weight(1f))
         Button(
             onClick = { cat.favorite.value = !cat.favorite.value },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Companion.Blue),

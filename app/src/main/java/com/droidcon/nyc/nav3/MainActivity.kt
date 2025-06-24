@@ -15,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entry
+import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
@@ -53,15 +55,15 @@ class MainActivity : ComponentActivity() {
                     NavDisplay(
                         backStack = backStack,
                         modifier = Modifier.padding(padding),
-                        entryProvider = { key ->
-                            when (key) {
-                                is Feed -> NavEntry(Feed) {
-                                    FeedScreen(backstack = backStack)
-                                }
-                                is Post -> NavEntry(Post(key.cat)) {
-                                    PostScreen(backstack = backStack, post = key)
-                                }
-                                else -> error("Unknown key: $key")
+                        entryProvider = entryProvider {
+                            entry<Feed> {
+                                FeedScreen(backstack = backStack)
+                            }
+                            entry<Post> { post ->
+                                PostScreen(backstack = backStack, post = post)
+                            }
+                            entry<Profile> {
+                                ProfileScreen()
                             }
                         }
                     )
