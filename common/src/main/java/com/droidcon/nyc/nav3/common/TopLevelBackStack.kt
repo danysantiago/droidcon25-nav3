@@ -4,10 +4,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.navigation3.runtime.NavKey
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 
-class TopLevelBackStack<T : NavKey>(startKey: T) {
+class TopLevelBackStack<T : NavKey>(startKey: TopLevelRoute) {
+
+    private val multipleBackstack: MutableMap<TopLevelRoute, MutableList<NavKey>> =
+
+    val currentTopLevelRoute: State<TopLevelRoute> =
+        private set
+
+    private val _currentBackstack: SnapshotStateList<NavKey>
+
+    val currentBackStack: List<NavKey>
+        get() = _currentBackstack
+
 
     /* Switch to top level destination */
     fun swapTopLevel(key: TopLevelRoute) {
