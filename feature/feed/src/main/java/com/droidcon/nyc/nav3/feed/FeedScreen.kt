@@ -38,14 +38,13 @@ import com.droidcon.nyc.nav3.common.data.catList
 import com.droidcon.nyc.nav3.common.di.UiScope
 import com.droidcon.nyc.nav3.metro.NavEntryContent
 import com.droidcon.nyc.nav3.post.Post
-import com.droidcon.nyc.nav3.post.PostScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
 object Feed : NavKey, TopLevelRoute { override val icon = Icons.AutoMirrored.Filled.List }
 
 @Composable
-fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
+internal fun FeedScreen(backstack: TopLevelBackStack<NavKey>) {
     Column {
         Text("Feed", fontSize = 30.sp, color = Color.Blue, modifier = Modifier.padding(15.dp))
         LazyColumn (

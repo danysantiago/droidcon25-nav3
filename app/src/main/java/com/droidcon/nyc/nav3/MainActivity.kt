@@ -19,11 +19,11 @@ import androidx.navigation3.ui.NavDisplay
 import com.droidcon.nyc.nav3.common.TopLevelBackStack
 import com.droidcon.nyc.nav3.common.data.TopLevelRoute
 import com.droidcon.nyc.nav3.feed.Feed
-import com.droidcon.nyc.nav3.feed.FeedScreen
+import com.droidcon.nyc.nav3.feed.feedEntry
 import com.droidcon.nyc.nav3.post.Post
-import com.droidcon.nyc.nav3.post.PostScreen
+import com.droidcon.nyc.nav3.post.postEntry
 import com.droidcon.nyc.nav3.profile.Profile
-import com.droidcon.nyc.nav3.profile.ProfileScreen
+import com.droidcon.nyc.nav3.profile.profileEntry
 import com.droidcon.nyc.nav3.ui.theme.NycDroidConTheme
 
 class MainActivity : ComponentActivity() {

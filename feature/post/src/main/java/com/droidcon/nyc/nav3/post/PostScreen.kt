@@ -32,7 +32,7 @@ import kotlinx.serialization.Serializable
 data class Post(@Contextual val cat: Cat) : NavKey
 
 @Composable
-fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
+internal fun PostScreen(backstack: TopLevelBackStack<NavKey>, post: Post) {
     val cat = post.cat
     Column {
         Text(cat.author, fontSize = 30.sp)
